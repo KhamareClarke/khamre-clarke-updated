@@ -25,8 +25,8 @@ function SpotsLeftCounter() {
 
   return (
     <div 
-      className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-gradient-to-r from-red-600 to-red-700 text-white px-3 py-2 sm:px-4 sm:py-3 rounded-full shadow-xl z-50 flex items-center gap-1 sm:gap-2 transition-all duration-500 transform ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+      className={`fixed top-2 right-2 sm:top-4 sm:right-4 bg-gradient-to-r from-red-600 to-red-700 text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full shadow-xl z-50 flex items-center gap-1 sm:gap-2 transition-all duration-500 transform ${
+        isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
       } ${isHovered ? 'scale-105' : ''} hover:shadow-red-500/30 cursor-pointer`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -36,15 +36,18 @@ function SpotsLeftCounter() {
     >
       <div className="relative">
         <div className="absolute -inset-1 bg-red-400 rounded-full blur animate-pulse"></div>
-        <div className="relative flex items-center justify-center h-6 w-6 bg-white rounded-full">
-          <span className="text-red-600 font-bold text-sm">{spotsLeft}</span>
+        <div className="relative flex items-center justify-center h-4 w-4 sm:h-6 sm:w-6 bg-white rounded-full">
+          <span className="text-red-600 font-bold text-xs sm:text-sm">{spotsLeft}</span>
         </div>
       </div>
-      <span className="font-bold text-xs sm:text-sm whitespace-nowrap">
+      <span className="font-bold text-xs sm:text-sm whitespace-nowrap hidden xs:inline">
         HURRY! {spotsLeft} Spot{spotsLeft === 1 ? '' : 's'} Left
       </span>
+      <span className="font-bold text-xs whitespace-nowrap xs:hidden">
+        {spotsLeft} Left
+      </span>
       <svg 
-        className="w-4 h-4 animate-bounce-horizontal" 
+        className="w-3 h-3 sm:w-4 sm:h-4 animate-bounce-horizontal hidden sm:block" 
         fill="none" 
         stroke="currentColor" 
         viewBox="0 0 24 24"
@@ -865,10 +868,10 @@ export default function BusinessBundlePage() {
       </section>
 
       {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-[#ffb700] to-[#ff8c00] p-4 z-40 md:hidden border-t-2 border-[#ffb700] shadow-2xl transition-transform duration-300" id="mobile-cta">
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-[#ffb700] to-[#ff8c00] p-3 sm:p-4 z-40 md:hidden border-t-2 border-[#ffb700] shadow-2xl transition-transform duration-300 pb-safe" id="mobile-cta">
         <a 
           href="https://calendly.com/khamareclarke/new-meeting" target="_blank" rel="noreferrer"
-          className="block w-full text-center bg-black text-white font-bold py-4 rounded-xl text-lg shadow-lg active:scale-95 transition-transform duration-150"
+          className="block w-full text-center bg-black text-white font-bold py-3 sm:py-4 rounded-xl text-base sm:text-lg shadow-lg active:scale-95 transition-transform duration-150"
         >
           🚀 Secure My £699 Spot Now
         </a>
@@ -881,6 +884,28 @@ export default function BusinessBundlePage() {
         }
         .animate-bounce-horizontal {
           animation: bounce-horizontal 1.5s infinite;
+        }
+        
+        /* Mobile safe area handling */
+        .pb-safe {
+          padding-bottom: max(12px, env(safe-area-inset-bottom));
+        }
+        
+        /* Ensure mobile CTA doesn't overlap with browser UI */
+        @media (max-width: 768px) {
+          #mobile-cta {
+            bottom: env(safe-area-inset-bottom, 0px);
+          }
+        }
+        
+        /* Extra small screens - hide some text to prevent overflow */
+        @media (max-width: 375px) {
+          .xs\\:hidden {
+            display: none !important;
+          }
+          .xs\\:inline {
+            display: inline !important;
+          }
         }
       `}</style>
       
