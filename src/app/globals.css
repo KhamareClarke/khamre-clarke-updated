@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start: #0f1014;
+  --background-end: #16181d;
+}
+
+/* Removed dark mode override, always use the same background */
+
+body {
+  color: var(--foreground-rgb);
+  background: linear-gradient(135deg, var(--background-start), var(--background-end));
+  overflow-x: hidden;
+}
+
+/* Ensure no horizontal scroll on mobile */
+html {
+  overflow-x: hidden;
+}
+
+/* Better mobile scrolling */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent zoom on form inputs on mobile */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
