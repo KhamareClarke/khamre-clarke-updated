@@ -25,8 +25,8 @@ function SpotsLeftCounter() {
 
   return (
     <div 
-      className={`fixed top-2 right-2 sm:top-4 sm:right-4 bg-gradient-to-r from-red-600 to-red-700 text-white px-2 py-1 sm:px-3 sm:py-2 rounded-full shadow-xl z-50 flex items-center gap-1 sm:gap-2 transition-all duration-500 transform ${
-        isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+      className={`fixed top-3 left-1/2 transform -translate-x-1/2 sm:top-4 sm:right-4 sm:left-auto sm:transform-none bg-gradient-to-r from-red-600 to-red-700 text-white px-3 py-2 sm:px-4 sm:py-3 rounded-full shadow-xl z-50 flex items-center gap-2 transition-all duration-500 ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-[-100%] opacity-0'
       } ${isHovered ? 'scale-105' : ''} hover:shadow-red-500/30 cursor-pointer`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -36,18 +36,15 @@ function SpotsLeftCounter() {
     >
       <div className="relative">
         <div className="absolute -inset-1 bg-red-400 rounded-full blur animate-pulse"></div>
-        <div className="relative flex items-center justify-center h-4 w-4 sm:h-6 sm:w-6 bg-white rounded-full">
-          <span className="text-red-600 font-bold text-xs sm:text-sm">{spotsLeft}</span>
+        <div className="relative flex items-center justify-center h-5 w-5 sm:h-6 sm:w-6 bg-white rounded-full">
+          <span className="text-red-600 font-bold text-sm">{spotsLeft}</span>
         </div>
       </div>
-      <span className="font-bold text-xs sm:text-sm whitespace-nowrap hidden xs:inline">
+      <span className="font-bold text-sm sm:text-sm whitespace-nowrap">
         HURRY! {spotsLeft} Spot{spotsLeft === 1 ? '' : 's'} Left
       </span>
-      <span className="font-bold text-xs whitespace-nowrap xs:hidden">
-        {spotsLeft} Left
-      </span>
       <svg 
-        className="w-3 h-3 sm:w-4 sm:h-4 animate-bounce-horizontal hidden sm:block" 
+        className="w-4 h-4 animate-bounce-horizontal" 
         fill="none" 
         stroke="currentColor" 
         viewBox="0 0 24 24"
